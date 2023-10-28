@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="100%" height="auto" alt="addreth" src="https://github.com/bpierre/blo/assets/36158/8f4b0ac6-142a-4b2e-b55d-b6a033f0fb59">
+  <a href="https://imgflip.com/i/8464ok"><img src="https://i.imgflip.com/8464ok.jpg" title="addreth/></a>
 </div>
 
 ## What It Does
