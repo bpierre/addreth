@@ -42,7 +42,7 @@ function App() {
 }
 ```
 
-From here, the easiest is to check out the demo page [demo page](https://addreth.vercel.app/). You can also find the API documentation below.
+From here, you can check out the [demo page](https://addreth.vercel.app/) to see what you can do with the component, or consult the API documentation below.
 
 ## API
 
