@@ -3,7 +3,7 @@ import { globalStyle, style } from "@vanilla-extract/css";
 export const main = style({
   zIndex: 999, // 999 should be enough since the portal target can be changed
   overflow: "hidden",
-  outlineWidth: 2,
+  outline: 0,
 
   // transition styles
   opacity: 0,
@@ -12,10 +12,6 @@ export const main = style({
   transitionDuration: "100ms",
   transitionTimingFunction: "cubic-bezier(0, 0.5 0.5, 1)",
   pointerEvents: "none",
-
-  ":focus-visible": {
-    outlineStyle: "solid",
-  },
 });
 
 globalStyle(`${main}, ${main} *`, {

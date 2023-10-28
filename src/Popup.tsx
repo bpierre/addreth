@@ -117,7 +117,6 @@ export function Popup({
         left,
         background: th.popupBackground,
         borderRadius: th.popupRadius,
-        outlineColor: th.focusColor,
         boxShadow: th.popupShadow,
       }}
     >
