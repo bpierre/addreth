@@ -1,0 +1,32 @@
+{
+  "name": "demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "addreth": "workspace:*",
+    "goober": "^2.1.13",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "wagmi": "^1.4.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.13",
+    "@types/react-syntax-highlighter": "^15.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "eslint": "^8.51.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.11"
+  }
+}
