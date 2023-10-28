@@ -91,7 +91,7 @@ const DEMOS: DemoDeclaration[] = [
     ];
   },
   [
-    `// The badge auto resizes as expected\n\n<Addreth\n  ens={false}\n  shortenAddress={6}\n/>`,
+    `// Keep the first and last 6 characters\n\n<Addreth\n  ens={false}\n  shortenAddress={6}\n/>`,
     <Addreth
       address={ADDR1}
       ens={false}
