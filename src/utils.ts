@@ -5,8 +5,3 @@ export function shortenAddress(address: Address, chars: number) {
     ? address
     : address.slice(0, chars + 2) + "…" + address.slice(-chars);
 }
-
-export const externalLinkAttributes = {
-  rel: "noopener noreferrer",
-  target: "_blank",
-};

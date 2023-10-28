@@ -3,7 +3,6 @@ import type { ExplorerLink, Theme } from "./types";
 
 import { Icon } from "./icons";
 import * as styles from "./LinkButton.css";
-import { externalLinkAttributes } from "./utils";
 
 export function LinkButton({
   className,
@@ -23,7 +22,8 @@ export function LinkButton({
       className={[styles.main, className].join(" ")}
       href={explorer.accountUrl}
       title={explorer.name}
-      {...externalLinkAttributes}
+      rel="noopener noreferrer"
+      target="_blank"
       style={{
         color: th.secondaryColor,
         outlineColor: th.focusColor,

@@ -13,7 +13,7 @@ import { LinkButton } from "./LinkButton";
 import { useImageLoaded } from "./use-image-loaded";
 import { useInjectCss } from "./use-inject-css";
 import { useSsr } from "./use-ssr";
-import { externalLinkAttributes, shortenAddress } from "./utils";
+import { shortenAddress } from "./utils";
 
 export type AddrethProps = {
   address: Address;
@@ -123,19 +123,7 @@ const AddrethWrapped = forwardRef(function AddrethWrapped({
   );
   const unified = th.badgeGap === 0 && !transparent;
 
-  if (ssr) {
-    return (
-      <a
-        href={explorer.accountUrl}
-        title={address}
-        {...externalLinkAttributes}
-      >
-        {labelNode}
-      </a>
-    );
-  }
-
-  return (
+  return !ssr && (
     <ConfigProvider {...config}>
       <span
         ref={popupTarget}

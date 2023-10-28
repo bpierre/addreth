@@ -317,7 +317,7 @@ function App() {
 
 ### Is it SSR-friendly?
 
-Yes, on the server it will render as a link pointing to the block explorer of your choice (Etherscan by default).
+The component won’t cause any issue in SSR environments, however it will only render after the styles have been injected into the page.
 
 ### Does it work with Ethers.js or other Ethereum libraries?
 
