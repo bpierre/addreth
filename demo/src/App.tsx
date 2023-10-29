@@ -146,7 +146,7 @@ const DEMOS: DemoDeclaration[] = [
     />,
   ],
   [
-    "// Custom icon\n\n<Addreth\n  icon={(address) => (\n    <RainbowAvatar address={address} />\n  )}\n/>",
+    "// Rainbow style icon\n\n<Addreth\n  icon={(address) => (\n    <RainbowAvatar address={address} />\n  )}\n/>",
     <Addreth
       address={ADDR1}
       icon={(address) => <RainbowAvatar address={address} />}
