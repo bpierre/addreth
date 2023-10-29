@@ -36,7 +36,7 @@ yarn add addreth
 
 ## Getting Started
 
-Import and insert the component in your app:
+Import `Addreth` and add it to your app:
 
 ```tsx
 import { Addreth } from "addreth";
