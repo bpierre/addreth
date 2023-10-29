@@ -16,19 +16,27 @@
 
 ## How It Looks
 
+<div align="center">
+  
 ![With ENS name resolution](https://github.com/bpierre/blo/assets/36158/9a650577-88ff-4728-8c2e-ff69ead4dd17)
 ![Without ENS name resolution](https://github.com/bpierre/blo/assets/36158/75066867-2759-431c-bade-26807a300e70)
 ![Popup](https://github.com/bpierre/blo/assets/36158/e8539d4e-fb53-4dc5-8ccc-81f14abc0bc7)
 
-<p align="center"><br>Design by <a href="https://twitter.com/dizzypaty">Paty Davila</a>.</p>
+<h3>Design by <a href="https://twitter.com/dizzypaty">Paty Davila</a></h3>
 
-## Getting Started
+</div>
+
+## Installation
 
 ```sh
 npm i -S addreth
 pnpm add addreth
 yarn add addreth
 ```
+
+## Getting Started
+
+Import and insert the component in your app:
 
 ```tsx
 import { Addreth } from "addreth";
@@ -42,7 +50,7 @@ function App() {
 }
 ```
 
-From here, you can check out the [demo page](https://addreth.vercel.app/) to see what you can do with the component, or consult the API documentation below.
+From this point, you could check out the [demo page](https://addreth.vercel.app/) to see various examples of what can be done with the component, or consult the API documentation below.
 
 ## API
 
