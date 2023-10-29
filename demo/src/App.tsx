@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { Addreth, AddrethConfig } from "addreth";
 import { css } from "goober";
 import { useEffect, useState } from "react";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -7,8 +8,6 @@ import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import { Addreth, AddrethConfig } from "../../src";
-import { AddrethPopup } from "../../src/AddrethPopup";
 import { RainbowAvatar } from "./RainbowAvatar";
 
 SyntaxHighlighter.registerLanguage("tsx", tsx);
@@ -213,28 +212,6 @@ const DEMOS: DemoDeclaration[] = [
       />,
     ];
   },
-  [
-    "// Popup (internal API)",
-    <AddrethPopup
-      address={ADDR1}
-      show={true}
-      explorer={{
-        name: "Etherscan",
-        accountUrl: `https://etherscan.io/address/${ADDR1}`,
-      }}
-    />,
-  ],
-  [
-    "// Popup (internal API) with a long explorer name",
-    <AddrethPopup
-      address={ADDR1}
-      show={true}
-      explorer={{
-        name: "Etherscan Etherscan Etherscan",
-        accountUrl: `https://etherscan.io/address/${ADDR1}`,
-      }}
-    />,
-  ],
 ];
 /* eslint-enable react/jsx-key */
 
