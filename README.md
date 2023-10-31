@@ -2,7 +2,7 @@
   <img width="100%" height="auto" alt="addreth" src="https://github.com/bpierre/blo/assets/36158/8f4b0ac6-142a-4b2e-b55d-b6a033f0fb59">
 </div>
 
-<p align=center><br><a href="https://www.npmjs.com/package/addreth"><img src="https://badgen.net/npm/v/addreth" alt="npm version"></a> <a href="https://bundlejs.com/?q=addreth&treeshake=%5B%7B+Addreth+%7D%5D&config=%7B%22esbuild%22%3A%7B%22external%22%3A%5B%22react%22%2C%22react-dom%22%2C%22wagmi%22%5D%7D%7D"><img src="https://deno.bundlejs.com/badge?q=addreth&treeshake=[{+Addreth+}]&config={%22esbuild%22%3A{%22external%22%3A[%22react%22%2C%22react-dom%22%2C%22wagmi%22]}}" alt="bundle size"></a> <a href="https://github.com/bpierre/blo/addreth/main/LICENSE"><img src="https://badgen.net/npm/license/addreth" alt="License: MIT"></a></p>
+<p align=center><br><a href="https://www.npmjs.com/package/addreth"><img src="https://badgen.net/npm/v/addreth" alt="npm version"></a> <a href="https://bundlejs.com/?q=addreth&treeshake=%5B%7B+Addreth+%7D%5D&config=%7B%22esbuild%22%3A%7B%22external%22%3A%5B%22react%22%2C%22react-dom%22%2C%22wagmi%22%5D%7D%7D"><img src="https://deno.bundlejs.com/badge?q=addreth&treeshake=[{+Addreth+}]&config={%22esbuild%22:{%22external%22:[%22react%22,%22react-dom%22,%22wagmi%22]}}" alt="bundle size"></a> <a href="https://github.com/bpierre/blo/addreth/main/LICENSE"><img src="https://badgen.net/npm/license/addreth" alt="License: MIT"></a></p>
 
 ## What It Does
 
