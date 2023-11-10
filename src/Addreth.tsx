@@ -6,9 +6,9 @@ import { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "reac
 import { createPortal } from "react-dom";
 import * as styles from "./Addreth.css";
 import { AddrethPopup } from "./AddrethPopup";
-import { ConfigProvider, useExtendConfig } from "./Config";
+import { ConfigProvider } from "./Config";
 import { CopyButton } from "./CopyButton";
-import { Ens, useEnsResolved } from "./Ens";
+import { useEnsResolved } from "./Ens";
 import { LinkButton } from "./LinkButton";
 import { useImageLoaded } from "./use-image-loaded";
 import { useInjectCss } from "./use-inject-css";
@@ -72,7 +72,7 @@ export type AddrethProps = {
   uppercase?: boolean;
 };
 
-const AddrethWrapped = forwardRef(function AddrethWrapped({
+export const Addreth = forwardRef(function Addreth({
   address,
   config,
 }: {
@@ -118,9 +118,8 @@ const AddrethWrapped = forwardRef(function AddrethWrapped({
     outlineColor: th.focusColor,
   };
   const buttonHeight = th.badgeHeight - th.badgePadding * 2;
-  const transparent = (
-    th.badgeBackground === "transparent" || th.badgeBackground === "none"
-  );
+  const transparent = th.badgeBackground === "transparent"
+    || th.badgeBackground === "none";
   const unified = th.badgeGap === 0 && !transparent;
 
   return !ssr && (
@@ -233,27 +232,5 @@ const AddrethWrapped = forwardRef(function AddrethWrapped({
         )}
       </span>
     </ConfigProvider>
-  );
-});
-
-export const Addreth = forwardRef(function Addreth(
-  props: AddrethProps,
-  ref: ForwardedRef<HTMLButtonElement>,
-) {
-  const config = useExtendConfig(props);
-  return (
-    <Ens
-      address={props.address}
-      fetch={{
-        avatar: config.icon === "ens",
-        name: config.label === "ens",
-      }}
-    >
-      <AddrethWrapped
-        ref={ref}
-        address={props.address}
-        config={config}
-      />
-    </Ens>
   );
 });

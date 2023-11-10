@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import type { Address } from "./types";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 
-type WagmiHooks = {
+export type EnsHooks = {
   useEnsAvatar:
     | null
     | ((params: { name: string | null; enabled: boolean }) => {
@@ -16,7 +16,7 @@ type WagmiHooks = {
     });
 };
 
-type WagmiFetch = {
+export type EnsFetchSettings = {
   avatar: boolean;
   name: boolean;
 };
@@ -29,75 +29,29 @@ export const EnsContext = createContext<{
   name: null,
 });
 
-export function Ens({
-  address,
-  children,
-  fetch,
-}: {
-  address: Address;
-  children: ReactNode;
-  fetch: WagmiFetch;
-}) {
-  const [wagmiHooks, setWagmiHooks] = useState<WagmiHooks | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    import("wagmi").then(
-      (wagmi) => {
-        if (!cancelled) {
-          setWagmiHooks(wagmi);
-        }
-      },
-      () => {
-        if (!cancelled) {
-          // no wagmi
-          setWagmiHooks(null);
-        }
-      },
-    );
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  return (
-    wagmiHooks
-      ? (
-        <EnsResolver
-          address={address}
-          fetch={fetch}
-          wagmiHooks={wagmiHooks}
-        >
-          {children}
-        </EnsResolver>
-      )
-      : children
-  );
-}
-
 export function useEnsResolved() {
   return useContext(EnsContext);
 }
 
-function EnsResolver({
+export function EnsResolver({
   address,
   children,
-  fetch,
-  wagmiHooks,
+  fetchSettings,
+  ensHooks,
 }: {
   address: Address;
   children: ReactNode;
-  fetch: WagmiFetch;
-  wagmiHooks: WagmiHooks;
+  fetchSettings: EnsFetchSettings;
+  ensHooks: EnsHooks;
 }) {
-  const name = wagmiHooks.useEnsName?.({
+  const name = ensHooks.useEnsName?.({
     address,
-    enabled: fetch.name,
+    enabled: fetchSettings.name,
   }).data ?? null;
 
-  const avatar = wagmiHooks.useEnsAvatar?.({
+  const avatar = ensHooks.useEnsAvatar?.({
     name: name || "",
-    enabled: Boolean(fetch.avatar && name),
+    enabled: Boolean(fetchSettings.avatar && name),
   }).data ?? null;
 
   return (
