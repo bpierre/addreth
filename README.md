@@ -19,7 +19,7 @@
 ## How It Looks
 
 <div align="center">
-  
+
 ![With ENS name resolution](https://github.com/bpierre/blo/assets/36158/9a650577-88ff-4728-8c2e-ff69ead4dd17)
 ![Without ENS name resolution](https://github.com/bpierre/blo/assets/36158/75066867-2759-431c-bade-26807a300e70)
 ![Popup](https://github.com/bpierre/blo/assets/36158/e8539d4e-fb53-4dc5-8ccc-81f14abc0bc7)
@@ -333,15 +333,23 @@ The component won’t cause any issue in SSR environments, however it will only 
 
 You can wrap the component and set `icon` and `label` to anything you want, including ENS name and avatar coming from another library.
 
-### I am not using wagmi, but Next.js says it cannot resolve the dependency.
+### I am not using wagmi, but my webpack-based bundler (Next.js, Create React App) says it cannot resolve the dependency.
 
-Next.js tries to resolve all imports including when using [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) which addreth uses to detect the presence of [wagmi](https://wagmi.sh/). A solution is to tell Next.js to ignore this dependency by adding this to your next.config.js:
+Webpack attempts to resolve all imports including the optional dependencies imported via [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import), which addreth uses to detect the presence of [wagmi](https://wagmi.sh/).
+
+With Next.js, a solution to ignore this dependency by adding this to your next.config.js:
 
 ```js
 webpack(conf) {
   conf.resolve.fallback = { wagmi: false };
   return conf;
 }
+```
+
+With other webpack-based bundlers, you can use the `addreth/no-wagmi` import path:
+
+```tsx
+import { Addreth } from "addreth/no-wagmi";
 ```
 
 ## License
