@@ -31,7 +31,7 @@ type DemoDeclaration =
 let DEMOS: DemoDeclaration[] = [
   [
     "<Addreth />",
-    <Addreth address={ADDR1} injectCss={true} ssr={false} />,
+    <Addreth address={ADDR1} />,
   ],
   [
     "<Addreth ens={false} />",
