@@ -48,6 +48,7 @@ export function CopyButton({
         startCopyAnim();
       }}
       style={{
+        overflow: "hidden",
         color: th.secondaryColor,
         outlineColor: th.focusColor,
         ...style,

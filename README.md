@@ -52,7 +52,48 @@ function App() {
 }
 ```
 
-From this point, you could check out the [demo page](https://addreth.vercel.app/) to see various examples of what can be done with the component, or consult the API documentation below.
+From this point, you could check out the [demo page](https://addreth.vercel.app/) to see various examples of what can be done with the component, or keep reading this documentation to learn more about the available options.
+
+### Note about the component CSS
+
+As with most React components, addreth relies on a small CSS base to work. There is no standard way to distribute CSS files with React components, so Addreth provides three ways to handle this.
+
+- When used without `<AddrethConfig/>`, `<Addreth />` renders its own CSS, this is to make it as easy as possible to get started and is fine performance wise for most cases. However, you might want to consider using `<AddrethConfig />` if many instances of the component are being rendered simultaneously (see next point).
+
+  ```tsx
+  import { Addreth } from "addreth";
+
+  function App() {
+    return <Addreth />;
+  }
+  ```
+- When the [`<AddrethConfig />`](#addrethconfig-) is rendered anywhere above `<Addreth />`, the top level one will take the responsibility to render styles once, making it more efficient.
+
+  ```tsx
+  import { Addreth, AddrethConfig } from "addreth";
+
+  function App() {
+    return (
+      <AddrethConfig>
+        <Addreth />
+      </AddrethConfig>
+    );
+  }
+  ```
+- You can also bundle the CSS yourself if your bundler supports it, by importing `"addreth/styles.css"` and setting `externalCss` to `true` in the configuration to make the CSS rendering fully static. This is the most efficient way to render the styles.
+
+```tsx
+import { Addreth, AddrethConfig } from "addreth";
+import "addreth/styles.css";
+
+function App() {
+  return (
+    <AddrethConfig externalCss>
+      <Addreth />
+    </AddrethConfig>
+  );
+}
+```
 
 ## API
 
@@ -113,6 +154,27 @@ The `explorer` prop allows to generate the name and URL of a given block explore
     name: "Base",
     url: `https://basescan.com/address/${address}`,
   })}
+```
+
+</details>
+
+<details>
+<summary><b><code>externalCss</code></b></summary>
+<br>
+
+The `externalCss` prop allows to control whether to inject the CSS or not. This is useful if you want to bundle the Addreth CSS with your app. It defaults to `false`.
+
+```tsx
+import { Addreth, AddrethConfig } from "addreth";
+import "addreth/styles.css";
+
+function App() {
+  return (
+    <AddrethConfig externalCss>
+      <Addreth />
+    </AddrethConfig>
+  );
+}
 ```
 
 </details>
@@ -323,11 +385,20 @@ function App() {
 }
 ```
 
+Notes:
+
+- `<AddrethConfig />` can be used multiple times in the same app, and its configuration will be merged.
+- The most top level `<AddrethConfig />` will be responsible for rendering the CSS, so it is recommended to use it at the top level of your app even if you don’t intent to customize its configuration.
+
 ## FAQ
 
-### Is it SSR-friendly?
+### Is it <abbr title="Server-side rendering">SSR</abbr>-friendly?
 
-The component won’t cause any issue in SSR environments, however it will only render after the styles have been injected into the page.
+Yes, both the component and its styles can be prerendered on the server.
+
+### Is it <abbr title="React Server Components">RSC</abbr>-friendly?
+
+Yes, Addreth is declared as a Client Component in this context. Check out this [excellent article by Josh Comeau](https://www.joshwcomeau.com/react/server-components/) to learn more about how it works.
 
 ### Does it work with Ethers.js or other Ethereum libraries?
 

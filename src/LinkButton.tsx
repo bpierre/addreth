@@ -25,6 +25,7 @@ export function LinkButton({
       rel="noopener noreferrer"
       target="_blank"
       style={{
+        display: "flex",
         color: th.secondaryColor,
         outlineColor: th.focusColor,
         ...style,

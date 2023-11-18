@@ -11,8 +11,6 @@ import { CopyButton } from "./CopyButton";
 import { useEnsResolved } from "./Ens";
 import { LinkButton } from "./LinkButton";
 import { useImageLoaded } from "./use-image-loaded";
-import { useInjectCss } from "./use-inject-css";
-import { useSsr } from "./use-ssr";
 import { shortenAddress } from "./utils";
 
 export type AddrethProps = {
@@ -41,6 +39,9 @@ export type AddrethProps = {
     | null
     // custom icon element (element) or URL (string)
     | ((address: Address) => ReactElement | string);
+
+  // Disables the CSS injection if true (default: false).
+  externalCss?: boolean;
 
   // The badge label (default: "ens" if `ens` is true, "address" otherwise).
   label?:
@@ -79,9 +80,6 @@ export const Addreth = forwardRef(function Addreth({
   address: AddrethProps["address"];
   config: Config;
 }, ref: ForwardedRef<HTMLButtonElement>) {
-  useInjectCss(config.stylesId);
-
-  const ssr = useSsr();
   const [opened, setOpened] = useState(false);
   const ens = useEnsResolved();
 
@@ -107,7 +105,7 @@ export const Addreth = forwardRef(function Addreth({
 
   const explorer = config.explorer(address);
 
-  const popupTarget = useRef(null);
+  const popupTarget = useRef<HTMLElement>(null);
   useImperativeHandle<HTMLElement | null, HTMLElement | null>(
     ref,
     () => popupTarget.current,
@@ -122,20 +120,22 @@ export const Addreth = forwardRef(function Addreth({
     || th.badgeBackground === "none";
   const unified = th.badgeGap === 0 && !transparent;
 
-  return !ssr && (
-    <ConfigProvider {...config}>
-      <span
-        ref={popupTarget}
-        className={styles.main}
-        style={{
-          gap: th.badgeGap,
-          maxWidth: config.maxWidth,
-          height: buttonHeight, // styles.main is not using border-box
-          color: th.textColor,
-          padding: th.badgePadding,
-          fontSize: th.fontSize,
-        }}
-      >
+  return (
+    <span
+      ref={popupTarget}
+      className={styles.main}
+      style={{
+        opacity: 1,
+        display: "inline-flex",
+        gap: th.badgeGap,
+        maxWidth: config.maxWidth,
+        height: buttonHeight,
+        color: th.textColor,
+        padding: th.badgePadding,
+        fontSize: th.fontSize,
+      }}
+    >
+      <ConfigProvider {...config}>
         <button
           className={[
             styles.addressButton,
@@ -150,38 +150,38 @@ export const Addreth = forwardRef(function Addreth({
             ...config.fontMono,
           }}
         >
-          {unified && (
-            <div
-              className={styles.badgeBackground}
-              style={{
-                background: th.badgeBackground,
-                borderRadius: th.badgeRadius,
-              }}
-            />
-          )}
-          <div
+          <span
+            className={styles.badgeBackground}
+            style={{
+              position: "absolute",
+              opacity: unified ? 1 : 0,
+              background: th.badgeBackground,
+              borderRadius: th.badgeRadius,
+            }}
+          />
+          <span
             className={styles.badgeIconLabel}
             style={{
+              display: "flex",
+              alignItems: "center",
               gap: th.badgeGap,
               ...outline,
             }}
           >
-            {(iconSrc || customBadgeIcon) && (
-              iconSrc
-                ? (
-                  <img
-                    alt=""
-                    width={buttonHeight}
-                    src={iconLoaded && iconSrc || blo(address)}
-                    style={{
-                      width: transparent ? "1.3em" : undefined,
-                      borderRadius: th.badgeIconRadius ?? th.badgeRadius,
-                    }}
-                  />
-                )
-                : customBadgeIcon
+            {customBadgeIcon || (
+              iconSrc && (
+                <img
+                  alt=""
+                  src={iconLoaded ? iconSrc : blo(address)}
+                  width={buttonHeight}
+                  style={{
+                    width: transparent ? "1.3em" : undefined,
+                    borderRadius: th.badgeIconRadius ?? th.badgeRadius,
+                  }}
+                />
+              )
             )}
-            <div
+            <span
               className={styles.label}
               style={{
                 textTransform: config.uppercase ? "uppercase" : "none",
@@ -192,8 +192,8 @@ export const Addreth = forwardRef(function Addreth({
               }}
             >
               <span className={styles.labelIn}>{labelNode}</span>
-            </div>
-          </div>
+            </span>
+          </span>
         </button>
         {["all", "copy"].includes(config.actions) && (
           <CopyButton
@@ -230,7 +230,7 @@ export const Addreth = forwardRef(function Addreth({
           />,
           config.popupNode ?? document.body,
         )}
-      </span>
-    </ConfigProvider>
+      </ConfigProvider>
+    </span>
   );
 });

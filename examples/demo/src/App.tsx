@@ -28,10 +28,10 @@ type DemoDeclaration =
   | ((darkMode: boolean) => Demo);
 
 /* eslint-disable react/jsx-key */
-const DEMOS: DemoDeclaration[] = [
+let DEMOS: DemoDeclaration[] = [
   [
     "<Addreth />",
-    <Addreth address={ADDR1} />,
+    <Addreth address={ADDR1} injectCss={true} ssr={false} />,
   ],
   [
     "<Addreth ens={false} />",
@@ -214,6 +214,10 @@ const DEMOS: DemoDeclaration[] = [
   },
 ];
 /* eslint-enable react/jsx-key */
+
+// DEMOS = DEMOS.filter((_, index) => (
+//   index === 0
+// ));
 
 const { publicClient, webSocketPublicClient } = configureChains(
   [mainnet],

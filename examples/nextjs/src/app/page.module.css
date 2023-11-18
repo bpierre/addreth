@@ -1,0 +1,9 @@
+.main {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: auto;
+  gap: 32px 16px;
+  min-height: 100vh;
+  padding: 80px;
+}

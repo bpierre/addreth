@@ -2,7 +2,6 @@ import { globalStyle, style } from "@vanilla-extract/css";
 import { buttonReset, ellipsis } from "./shared.css";
 
 export const main = style({
-  position: "relative",
   display: "inline-flex",
 });
 
@@ -22,8 +21,6 @@ export const badgeIconLabel = style({
   position: "relative",
   zIndex: 2,
   overflow: "hidden",
-  display: "flex",
-  alignItems: "center",
   height: "100%",
   outlineWidth: 2,
 });
@@ -34,7 +31,6 @@ globalStyle(
 );
 
 export const badgeBackground = style({
-  position: "absolute",
   inset: 0,
   zIndex: 1,
   height: "100%",
