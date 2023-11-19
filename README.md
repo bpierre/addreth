@@ -54,7 +54,7 @@ function App() {
 
 From this point, you could check out the [demo page](https://addreth.vercel.app/) to see various examples of what can be done with the component, or keep reading this documentation to learn more about the available options.
 
-### Note about the component CSS
+### CSS Distribution
 
 As with most React components, addreth relies on a small CSS base to work. There is no standard way to distribute CSS files with React components, so Addreth provides three ways to handle this.
 
@@ -82,18 +82,18 @@ As with most React components, addreth relies on a small CSS base to work. There
   ```
 - You can also bundle the CSS yourself if your bundler supports it, by importing `"addreth/styles.css"` and setting `externalCss` to `true` in the configuration to make the CSS rendering fully static. This is the most efficient way to render the styles.
 
-```tsx
-import { Addreth, AddrethConfig } from "addreth";
-import "addreth/styles.css";
-
-function App() {
-  return (
-    <AddrethConfig externalCss>
-      <Addreth />
-    </AddrethConfig>
-  );
-}
-```
+  ```tsx
+  import { Addreth, AddrethConfig } from "addreth";
+  import "addreth/styles.css";
+  
+  function App() {
+    return (
+      <AddrethConfig externalCss>
+        <Addreth />
+      </AddrethConfig>
+    );
+  }
+  ```
 
 ## API
 
