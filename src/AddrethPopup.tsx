@@ -2,8 +2,8 @@ import type { MutableRefObject } from "react";
 import type { Address, ExplorerLink } from "./types";
 
 import { blo } from "blo";
+import { useExtendConfig } from "./AddrethConfig";
 import * as styles from "./AddrethPopup.css";
-import { useExtendConfig } from "./Config";
 import { CopyButton } from "./CopyButton";
 import { LinkButton } from "./LinkButton";
 import { Popup } from "./Popup";

@@ -1,4 +1,4 @@
-export type { Config } from "./Config";
+export type { Config } from "./AddrethConfig";
 
 export type Address = `0x${string}`;
 

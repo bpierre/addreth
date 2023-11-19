@@ -12,14 +12,17 @@ type ConfigProps = Omit<AddrethProps, "address">;
 
 const ConfigContext = createContext<ConfigProps>({});
 
-export function ConfigProvider({
+export function AddrethConfig({
   children,
-  ...config
+  ...props
 }: Omit<AddrethProps, "address"> & { children: ReactNode }) {
+  const config = {
+    ...useContext(ConfigContext),
+    ...props,
+  };
   return (
     <ConfigContext.Provider
       value={{
-        ...useContext(ConfigContext),
         ...config,
         externalCss: true, // no need to inject the CSS below
       }}

@@ -5,8 +5,8 @@ import { blo } from "blo";
 import { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import * as styles from "./Addreth.css";
+import { AddrethConfig } from "./AddrethConfig";
 import { AddrethPopup } from "./AddrethPopup";
-import { ConfigProvider } from "./Config";
 import { CopyButton } from "./CopyButton";
 import { useEnsResolved } from "./Ens";
 import { LinkButton } from "./LinkButton";
@@ -125,7 +125,7 @@ export const Addreth = forwardRef(function Addreth({
       ref={popupTarget}
       className={styles.main}
       style={{
-        opacity: 1,
+        position: "relative",
         display: "inline-flex",
         gap: th.badgeGap,
         maxWidth: config.maxWidth,
@@ -135,7 +135,7 @@ export const Addreth = forwardRef(function Addreth({
         fontSize: th.fontSize,
       }}
     >
-      <ConfigProvider {...config}>
+      <AddrethConfig {...config}>
         <button
           className={[
             styles.addressButton,
@@ -230,7 +230,7 @@ export const Addreth = forwardRef(function Addreth({
           />,
           config.popupNode ?? document.body,
         )}
-      </ConfigProvider>
+      </AddrethConfig>
     </span>
   );
 });

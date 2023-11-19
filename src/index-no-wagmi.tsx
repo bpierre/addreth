@@ -3,9 +3,9 @@ import type { AddrethProps } from "./Addreth";
 
 import { forwardRef } from "react";
 import { Addreth as AddrethWrapped } from "./Addreth";
-import { useExtendConfig } from "./Config";
+import { useExtendConfig } from "./AddrethConfig";
 
-export { ConfigProvider as AddrethConfig } from "./Config";
+export { AddrethConfig } from "./AddrethConfig";
 export { THEMES } from "./theme";
 export * from "./types";
 
