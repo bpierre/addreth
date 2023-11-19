@@ -56,7 +56,7 @@ From this point, you could check out the [demo page](https://addreth.vercel.app/
 
 ### CSS Distribution
 
-As with most React components, addreth relies on a small CSS base to work. There is no standard way to distribute CSS files with React components, so Addreth provides three ways to handle this.
+As with most React components, addreth relies on a CSS foundation in order to render properly. There is no standard way to distribute CSS files with React components, so addreth provides three ways to handle this:
 
 - When used without `<AddrethConfig/>`, `<Addreth />` renders its own CSS, this is to make it as easy as possible to get started and is fine performance wise for most cases. However, you might want to consider using `<AddrethConfig />` if many instances of the component are being rendered simultaneously (see next point).
 
