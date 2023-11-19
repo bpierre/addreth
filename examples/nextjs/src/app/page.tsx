@@ -5,7 +5,6 @@ import Rand from "rand-seed";
 import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import styles from "./page.module.css";
-import "addreth/styles.css";
 
 const rand = new Rand("1234");
 
