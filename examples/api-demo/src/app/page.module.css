@@ -1,0 +1,124 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 80px;
+  font-size: 20px;
+}
+
+.header {
+  font-size: 20px;
+  text-align: center;
+  user-select: none;
+}
+
+.header a {
+  color: inherit;
+}
+.header a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 8px;
+  border-radius: 4px;
+}
+.header h1 {
+  margin: 0 0 10px;
+  font-size: 60px;
+  line-height: 80px;
+}
+.header p {
+  margin: 0;
+  line-height: 40px;
+}
+
+.demos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(540px, 1fr));
+  grid-auto-rows: 480px;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.demo {
+  overflow-x: auto;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-auto-rows: 2.5fr 2fr;
+  box-shadow: 0 0 24px rgb(0 0 0 / 0.2);
+  border-radius: 8px;
+}
+
+.lightButton {
+  appearance: none;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: 0 solid #0a0a0a;
+  border-radius: 50%;
+  outline-offset: -6px;
+}
+
+.lightButton:focus-visible {
+  outline-width: 2px;
+}
+
+.darkButton {
+  composes: lightButton;
+  outline-color: #f8f8f8;
+}
+
+.demoArea {
+  position: relative;
+  border-bottom: 2px solid #f8f8f8;
+}
+
+.demoArea > div {
+  position: absolute;
+  inset: 40px;
+  display: grid;
+  place-items: center;
+}
+
+.demoCode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #f8f8f8;
+  background: #0a0a0a;
+}
+
+@media (max-width: 600px) {
+  .main {
+    gap: 40px;
+    padding: 40px 0;
+  }
+  .header {
+    font-size: 16px;
+  }
+  .header h1 {
+    font-size: 40px;
+  }
+  .demos {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  .demo {
+    border-radius: 0;
+  }
+}

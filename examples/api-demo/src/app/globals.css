@@ -1,0 +1,15 @@
+body,
+button,
+h1 {
+  font-weight: 400;
+  font-size: 16px;
+}
+button,
+h1 {
+  font-family: inherit;
+}
+body {
+  margin: 0;
+  color: #fff;
+  background: #1d55ae;
+}

@@ -1,20 +1,15 @@
+"use client";
+
 import type { ReactNode } from "react";
 
 import { Addreth, AddrethConfig } from "addreth";
-import { css } from "goober";
-import { useEffect, useState } from "react";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
-import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Highlight, themes } from "prism-react-renderer";
+import { useState } from "react";
 import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
+import { commit, figtree } from "../fonts";
+import styles from "./page.module.css";
 import { RainbowAvatar } from "./RainbowAvatar";
-
-SyntaxHighlighter.registerLanguage("tsx", tsx);
-nord["pre[class*=\"language-\"]"] = {
-  ...nord["pre[class*=\"language-\"]"],
-  background: "#0a0a0a",
-};
 
 const ADDR1 = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045";
 
@@ -28,7 +23,7 @@ type DemoDeclaration =
   | ((darkMode: boolean) => Demo);
 
 /* eslint-disable react/jsx-key */
-let DEMOS: DemoDeclaration[] = [
+const DEMOS: DemoDeclaration[] = [
   [
     "<Addreth />",
     <Addreth address={ADDR1} />,
@@ -67,7 +62,7 @@ let DEMOS: DemoDeclaration[] = [
     base: "${darkMode ? "dark" : "light"}",
     // …
   }}
-  />`,
+/>`,
       <Addreth
         address={ADDR1}
         theme={{
@@ -215,10 +210,6 @@ let DEMOS: DemoDeclaration[] = [
 ];
 /* eslint-enable react/jsx-key */
 
-// DEMOS = DEMOS.filter((_, index) => (
-//   index === 0
-// ));
-
 const { publicClient, webSocketPublicClient } = configureChains(
   [mainnet],
   [publicProvider()],
@@ -230,90 +221,38 @@ const config = createConfig({
   webSocketPublicClient,
 });
 
-export function App() {
+export default function App() {
   return (
     <WagmiConfig config={config}>
-      <div
-        className={css({
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "80px",
-          minWidth: "320px",
-          margin: "0 auto",
-          padding: "80px",
-          fontSize: "20px",
-          fontFamily: "sans-serif",
-          "@media (max-width: 600px)": {
-            gap: "40px",
-            padding: "40px 0",
-          },
-        })}
+      <AddrethConfig
+        font={figtree.style.fontFamily}
+        fontMono={commit.style.fontFamily}
       >
-        <div
-          className={css({
-            fontSize: "20px",
-            textAlign: "center",
-            userSelect: "none",
-            "a": {
-              color: "inherit",
-            },
-            "a:focus-visible": {
-              outline: "2px solid currentColor",
-              outlineOffset: "8px",
-              borderRadius: "4px",
-            },
-            "h1": {
-              margin: "0 0 10px",
-              fontSize: "60px",
-            },
-            "p": {
-              margin: "0",
-            },
-            "@media (max-width: 600px)": {
-              fontSize: "16px",
-              "h1": {
-                fontSize: "40px",
-              },
-            },
-          })}
-        >
-          <h1>
-            addreth examples
-          </h1>
-          <p>
-            <a
-              href="https://github.com/bpierre/addreth"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              github.com/bpierre/addreth
-            </a>
-          </p>
+        <div className={styles.main}>
+          <div className={styles.header}>
+            <h1>
+              addreth examples
+            </h1>
+            <p>
+              <a
+                href="https://github.com/bpierre/addreth"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                github.com/bpierre/addreth
+              </a>
+            </p>
+          </div>
+          <div className={styles.demos}>
+            {DEMOS.map((demo, index) => (
+              <Demo
+                key={index}
+                demo={demo}
+              />
+            ))}
+          </div>
         </div>
-        <div
-          className={css({
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(540px, 1fr))",
-            gridAutoRows: "480px",
-            justifyContent: "center",
-            gap: "60px",
-            width: "100%",
-            margin: "0 auto",
-            "@media (max-width: 600px)": {
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-            },
-          })}
-        >
-          {DEMOS.map((demo, index) => (
-            <Demo
-              key={index}
-              demo={demo}
-            />
-          ))}
-        </div>
-      </div>
+      </AddrethConfig>
     </WagmiConfig>
   );
 }
@@ -325,101 +264,49 @@ function Demo({
 }) {
   const [darkMode, setDarkMode] = useState(false);
   const [code, children] = Array.isArray(demo) ? demo : demo(darkMode);
-
-  // delay mounting the syntax highlighter to circumvent
-  // a seemingly random bug where it renders as [object Object].
-  const [mountCode, setMountCode] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setMountCode(true), 0);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
-    <AddrethConfig
-      font="Figtree"
-      fontMono="Commit Mono"
-      theme={darkMode ? "dark" : "light"}
-    >
-      <div
-        className={css({
-          overflowX: "auto",
-          position: "relative",
-          overflow: "hidden",
-          display: "grid",
-          gridAutoRows: "2.5fr 2fr",
-          boxShadow: "0 0 24px rgb(0 0 0 / 0.2)",
-          borderRadius: "8px",
-          "@media (max-width: 600px)": {
-            borderRadius: 0,
-          },
-        })}
+    <div className={styles.demo}>
+      <button
+        className={darkMode ? styles.darkButton : styles.lightButton}
+        onClick={() => {
+          setDarkMode(!darkMode);
+        }}
       >
-        <button
-          onClick={() => {
-            setDarkMode(!darkMode);
-          }}
-          className={css({
-            appearance: "none",
-            position: "absolute",
-            zIndex: 2,
-            top: "0",
-            right: "0",
-            display: "grid",
-            placeItems: "center",
-            width: "60px",
-            height: "60px",
-            padding: "0",
-            fontSize: "24px",
-            background: "none",
-            border: "none",
-            borderRadius: "20px",
-            cursor: "pointer",
-            "&:focus-visible": {
-              outline: `2px solid ${darkMode ? "#f8f8f8" : "#0a0a0a"}`,
-              outlineOffset: "-6px",
-              borderRadius: "50%",
-            },
-          })}
-        >
-          <span>
-            {darkMode ? "🌛" : "🌞"}
-          </span>
-        </button>
-        <div
-          className={css({
-            position: "relative",
-            background: darkMode ? "#0a0a0a" : "#f8f8f8",
-            borderBottom: "2px solid #f8f8f8",
-          })}
-        >
-          <div
-            className={css({
-              position: "absolute",
-              inset: "40px",
-              display: "grid",
-              placeItems: "center",
-            })}
-          >
+        <span>
+          {darkMode ? "🌛" : "🌞"}
+        </span>
+      </button>
+      <div
+        className={styles.demoArea}
+        style={{
+          background: darkMode ? "#0a0a0a" : "#f8f8f8",
+        }}
+      >
+        <div>
+          <AddrethConfig theme={darkMode ? "dark" : "light"}>
             {children}
-          </div>
-        </div>
-        <div
-          className={css({
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: "14px",
-            color: "#f8f8f8",
-            background: "#0a0a0a",
-          })}
-        >
-          {mountCode && (
-            <SyntaxHighlighter language="tsx" style={nord}>
-              {code}
-            </SyntaxHighlighter>
-          )}
+          </AddrethConfig>
         </div>
       </div>
-    </AddrethConfig>
+      <div className={styles.demoCode}>
+        <Highlight
+          theme={themes.jettwaveDark}
+          code={code}
+          language="tsx"
+        >
+          {({ style, tokens, getLineProps, getTokenProps }) => (
+            <pre style={{ ...style, backgroundColor: "transparent" }}>
+                {tokens.map((line, i) => (
+                  <div key={i} {...getLineProps({ line })}>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                ))}
+            </pre>
+          )}
+        </Highlight>
+      </div>
+    </div>
   );
 }
