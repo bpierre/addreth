@@ -14,7 +14,7 @@
 - 🎹 **Accessible**: keyboard navigation and focus states work as expected.
 - 💆‍♀️ **Zero configuration**: just import and drop `<Addreth />` in your app.
 - 🪚 **Customizable**: change the global configuration with `<AddrethConfig />` (optional).
-- 📦 Small: **[5.05 kB](https://bundlejs.com/?bundle&q=addreth&treeshake=%5B%7B+Addreth+%7D%5D&config=%7B%22esbuild%22%3A%7B%22external%22%3A%5B%22react%22%2C%22react-dom%22%2C%22wagmi%22%5D%7D%7D)**, styles and themes included, and no external dependencies.
+- 📦 Small: **[5.01 kB](https://bundlejs.com/?bundle&q=addreth&treeshake=%5B%7B+Addreth+%7D%5D&config=%7B%22esbuild%22%3A%7B%22external%22%3A%5B%22react%22%2C%22react-dom%22%2C%22wagmi%22%5D%7D%7D)**, styles and themes included, and no external dependencies.
 
 ## How It Looks
 
