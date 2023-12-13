@@ -152,7 +152,7 @@ The `explorer` prop allows to generate the name and URL of a given block explore
   address="0x…"
   explorer={(address) => ({
     name: "Base",
-    url: `https://basescan.com/address/${address}`,
+    accountUrl: `https://basescan.com/address/${address}`,
   })}
 ```
 
