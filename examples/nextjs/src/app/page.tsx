@@ -1,16 +1,24 @@
 "use client";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Addreth, AddrethConfig } from "addreth";
 import Rand from "rand-seed";
-import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
+import { createConfig, http, WagmiProvider } from "wagmi";
+import { mainnet } from "wagmi/chains";
 import styles from "./page.module.css";
+
+const queryClient = new QueryClient();
+
+const config = createConfig({
+  chains: [mainnet],
+  transports: {
+    [mainnet.id]: http(),
+  },
+});
 
 const rand = new Rand("1234");
 
-const ADDRESSES_COUNT = 60;
-
-const ADDRESSES = Array.from({ length: ADDRESSES_COUNT }, () => {
+const ADDRESSES = Array.from({ length: 60 }, () => {
   let address = "0x";
   const chars = "abcdef0123456789";
   for (let i = 0; i < 40; i++) {
@@ -19,32 +27,23 @@ const ADDRESSES = Array.from({ length: ADDRESSES_COUNT }, () => {
   return address as `0x${string}`;
 });
 
-const { publicClient, webSocketPublicClient } = configureChains(
-  [mainnet],
-  [publicProvider()],
-);
-
-const config = createConfig({
-  autoConnect: true,
-  publicClient,
-  webSocketPublicClient,
-});
-
 export default function Home() {
   return (
-    <WagmiConfig config={config}>
-      <main className={styles.main}>
-        <AddrethConfig>
-          {ADDRESSES.map((address) => (
-            <Addreth
-              key={address}
-              address={address}
-              theme="dark"
-              fontMono="monospace"
-            />
-          ))}
-        </AddrethConfig>
-      </main>
-    </WagmiConfig>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <main className={styles.main}>
+          <AddrethConfig>
+            {ADDRESSES.map((address) => (
+              <Addreth
+                key={address}
+                address={address}
+                theme="dark"
+                fontMono="monospace"
+              />
+            ))}
+          </AddrethConfig>
+        </main>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }

@@ -6,7 +6,7 @@ import { createContext, useContext } from "react";
 export type EnsHooks = {
   useEnsAvatar:
     | null
-    | ((params: { name: string | null; enabled: boolean }) => {
+    | ((params: { name: string | undefined; enabled: boolean }) => {
       data: string | null | undefined;
     });
   useEnsName:

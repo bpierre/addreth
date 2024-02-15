@@ -47,33 +47,28 @@
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "wagmi": ">=1.4.0"
-  },
-  "peerDependenciesMeta": {
-    "wagmi": {
-      "optional": true
-    }
+    "wagmi": ">=2.0.0"
   },
   "devDependencies": {
-    "@compiled/babel-plugin": "^0.25.0",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "@vanilla-extract/css": "^1.14.0",
-    "@vanilla-extract/esbuild-plugin": "^2.3.1",
-    "@vanilla-extract/vite-plugin": "^3.9.1",
-    "@vitejs/plugin-react-swc": "^3.5.0",
+    "@compiled/babel-plugin": "^0.28.2",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "@vanilla-extract/css": "^1.14.1",
+    "@vanilla-extract/esbuild-plugin": "^2.3.5",
+    "@vanilla-extract/vite-plugin": "^4.0.4",
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "blo": "^1.1.1",
-    "esbuild": "^0.19.5",
-    "eslint": "^8.54.0",
+    "esbuild": "^0.20.0",
+    "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
-    "lightningcss": "^1.22.1",
-    "rollup-plugin-preserve-directives": "^0.2.0",
-    "typescript": "^5.0.2",
-    "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.6.3"
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "lightningcss": "^1.23.0",
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.2",
+    "vite-plugin-dts": "^3.7.2"
   }
 }

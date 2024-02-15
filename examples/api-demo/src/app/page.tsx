@@ -2,14 +2,25 @@
 
 import type { ReactNode } from "react";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Addreth, AddrethConfig } from "addreth";
 import { Highlight, themes } from "prism-react-renderer";
 import { useState } from "react";
-import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
+import { WagmiProvider } from "wagmi";
+import { createConfig, http } from "wagmi";
+import { mainnet } from "wagmi/chains";
 import { commit, figtree } from "../fonts";
 import styles from "./page.module.css";
 import { RainbowAvatar } from "./RainbowAvatar";
+
+const queryClient = new QueryClient();
+
+const config = createConfig({
+  chains: [mainnet],
+  transports: {
+    [mainnet.id]: http(),
+  },
+});
 
 const ADDR1 = "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045";
 
@@ -210,50 +221,41 @@ const DEMOS: DemoDeclaration[] = [
 ];
 /* eslint-enable react/jsx-key */
 
-const { publicClient, webSocketPublicClient } = configureChains(
-  [mainnet],
-  [publicProvider()],
-);
-
-const config = createConfig({
-  autoConnect: true,
-  publicClient,
-  webSocketPublicClient,
-});
-
 export default function App() {
   return (
-    <WagmiConfig config={config}>
-      <AddrethConfig
-        font={figtree.style.fontFamily}
-        fontMono={commit.style.fontFamily}
-      >
-        <div className={styles.main}>
-          <div className={styles.header}>
-            <h1>
-              addreth examples
-            </h1>
-            <p>
-              <a
-                href="https://github.com/bpierre/addreth"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                github.com/bpierre/addreth
-              </a>
-            </p>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <AddrethConfig
+          font={figtree.style.fontFamily}
+          fontMono={commit.style.fontFamily}
+        >
+          <div className={styles.main}>
+            <div className={styles.header}>
+              <h1>
+                addreth examples
+              </h1>
+              <p>
+                <a
+                  href="https://github.com/bpierre/addreth"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  github.com/bpierre/addreth
+                </a>
+              </p>
+            </div>
+            <div className={styles.demos}>
+              {DEMOS.map((demo, index) => (
+                <Demo
+                  key={index}
+                  demo={demo}
+                />
+              ))}
+            </div>
           </div>
-          <div className={styles.demos}>
-            {DEMOS.map((demo, index) => (
-              <Demo
-                key={index}
-                demo={demo}
-              />
-            ))}
-          </div>
-        </div>
-      </AddrethConfig>
-    </WagmiConfig>
+        </AddrethConfig>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }
 

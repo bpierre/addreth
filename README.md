@@ -85,7 +85,7 @@ As with most React components, addreth relies on a CSS foundation in order to wo
   ```tsx
   import { Addreth, AddrethConfig } from "addreth";
   import "addreth/styles.css";
-  
+
   function App() {
     return (
       <AddrethConfig externalCss>
@@ -400,9 +400,9 @@ Yes, both the component and its styles can be prerendered on the server.
 
 Yes, Addreth is declared as a Client Component in this context. Check out this [excellent article by Josh Comeau](https://www.joshwcomeau.com/react/server-components/) to learn more about how it works.
 
-### Does it work with Ethers.js or other Ethereum libraries?
+### Does it work with Ethers, Web3.js or other Ethereum libraries?
 
-You can wrap the component and set `icon` and `label` to anything you want, including ENS name and avatar coming from another library.
+Yes, wagmi is only used for ENS related features if present, but the component works without. For example, you could wrap Addreth and use another library to fetch the ENS name and avatar corresponding to the address, and set these as `icon` and `label`.
 
 ### I am not using wagmi, but my webpack-based bundler (Next.js, Create React App) says it cannot resolve the dependency.
 
