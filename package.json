@@ -21,7 +21,7 @@
   "scripts": {
     "demo": "cd demo && pnpm dev",
     "build": "pnpm tsc && node ./build.js",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint ./src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "type": "module",
   "sideEffects": false,
