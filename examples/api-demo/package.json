@@ -11,12 +11,12 @@
   "dependencies": {
     "@tanstack/react-query": "^5.51.11",
     "addreth": "workspace:*",
-    "next": "14.2.5",
+    "next": "14",
     "prism-react-renderer": "^2.3.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "viem": "^2.17.8",
-    "wagmi": "^2.11.3"
+    "react": "18",
+    "react-dom": "18",
+    "viem": "2",
+    "wagmi": "2"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
