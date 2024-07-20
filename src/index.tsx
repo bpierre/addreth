@@ -4,7 +4,7 @@ import type { AddrethProps } from "./Addreth";
 import { forwardRef } from "react";
 import { Addreth as AddrethWrapped } from "./Addreth";
 import { useExtendConfig } from "./AddrethConfig";
-import { EnsWagmi } from "./EnsWagmi";
+import { useEnsResolved } from "./ens";
 
 export { AddrethConfig } from "./AddrethConfig";
 export { THEMES } from "./theme";
@@ -15,19 +15,19 @@ export const Addreth = forwardRef(function Addreth(
   ref: ForwardedRef<HTMLButtonElement>,
 ) {
   const config = useExtendConfig(props);
+  const ensResolved = useEnsResolved({
+    address: props.address,
+    fetchSettings: {
+      avatar: config.icon === "ens",
+      name: config.label === "ens",
+    },
+  });
   return (
-    <EnsWagmi
+    <AddrethWrapped
+      ref={ref}
       address={props.address}
-      fetchSettings={{
-        avatar: config.icon === "ens",
-        name: config.label === "ens",
-      }}
-    >
-      <AddrethWrapped
-        ref={ref}
-        address={props.address}
-        config={config}
-      />
-    </EnsWagmi>
+      config={config}
+      ensResolved={ensResolved}
+    />
   );
 });
