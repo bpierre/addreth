@@ -8,7 +8,6 @@ import * as styles from "./Addreth.css";
 import { AddrethConfig } from "./AddrethConfig";
 import { AddrethPopup } from "./AddrethPopup";
 import { CopyButton } from "./CopyButton";
-import { useEnsResolved } from "./Ens";
 import { LinkButton } from "./LinkButton";
 import { useImageLoaded } from "./use-image-loaded";
 import { shortenAddress } from "./utils";
@@ -76,12 +75,16 @@ export type AddrethProps = {
 export const Addreth = forwardRef(function Addreth({
   address,
   config,
+  ens,
 }: {
   address: AddrethProps["address"];
   config: Config;
+  ens?: {
+    avatar: string | null;
+    name: string | null;
+  };
 }, ref: ForwardedRef<HTMLButtonElement>) {
   const [opened, setOpened] = useState(false);
-  const ens = useEnsResolved();
 
   const { icon, label, theme: th, shortenAddress: shortenAddress_ } = config;
 
@@ -89,7 +92,7 @@ export const Addreth = forwardRef(function Addreth({
 
   const iconSrc = useMemo(() => {
     if (typeof customBadgeIcon === "string") return customBadgeIcon;
-    if (icon === "ens") return ens.avatar ?? blo(address);
+    if (icon === "ens") return ens?.avatar ?? blo(address);
     if (icon === "identicon") return blo(address);
     if (typeof icon === "string") return icon;
     return null;
@@ -98,7 +101,7 @@ export const Addreth = forwardRef(function Addreth({
   const iconLoaded = useImageLoaded(iconSrc);
 
   const labelNode = useMemo(() => {
-    if (label === "ens" && ens.name) return ens.name;
+    if (label === "ens" && ens?.name) return ens.name;
     if (typeof label === "function") return label(address);
     return shortenAddress(address, shortenAddress_ || 40);
   }, [address, ens, label, shortenAddress_]);
@@ -197,8 +200,8 @@ export const Addreth = forwardRef(function Addreth({
         </button>
         {["all", "copy"].includes(config.actions) && (
           <CopyButton
-            content={label === "ens" && ens.name || address}
-            label={label === "ens" && ens.name || "address"}
+            content={label === "ens" && ens?.name || address}
+            label={label === "ens" && ens?.name || "address"}
             theme={th}
             style={{
               width: buttonHeight,

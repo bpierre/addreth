@@ -9,7 +9,7 @@
 - 👁 Display addresses in a compact way, while retaining the ability to see them in full.
 - 📋 Copy the address to the clipboard with a single click.
 - 👉 Check the address on the block explorer of your choice.
-- 🏷 **ENS resolution** works out of the box if [wagmi](https://wagmi.sh/) is present.
+- 🏷 **ENS resolution** works out of the box with [wagmi](https://wagmi.sh/) (optional).
 - 🌈 **Six themes** to choose from or to customize as desired.
 - 🎹 **Accessible**: keyboard navigation and focus states work as expected.
 - 💆‍♀️ **Zero configuration**: just import and drop `<Addreth />` in your app.
@@ -42,6 +42,9 @@ Import `Addreth` and add it to your app:
 
 ```tsx
 import { Addreth } from "addreth";
+
+// If you are not using wagmi, import from "addreth/no-wagmi":
+// import { Addreth } from "addreth/no-wagmi";
 
 function App() {
   return (
@@ -400,27 +403,24 @@ Yes, both the component and its styles can be prerendered on the server.
 
 Yes, Addreth is declared as a Client Component in this context. Check out this [excellent article by Josh Comeau](https://www.joshwcomeau.com/react/server-components/) to learn more about how it works.
 
-### Does it work with Ethers, Web3.js or other Ethereum libraries?
+### I am not using wagmi, can I still use Addreth?
 
-Yes, wagmi is only used for ENS related features if present, but the component works without. For example, you could wrap Addreth and use another library to fetch the ENS name and avatar corresponding to the address, and set these as `icon` and `label`.
-
-### I am not using wagmi, but my webpack-based bundler (Next.js, Create React App) says it cannot resolve the dependency.
-
-Webpack attempts to resolve all imports including the optional dependencies imported via [`import()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import), which addreth uses to detect the presence of [wagmi](https://wagmi.sh/).
-
-With Next.js, a solution to ignore this dependency by adding this to your next.config.js:
-
-```js
-webpack(conf) {
-  conf.resolve.fallback = { wagmi: false };
-  return conf;
-}
-```
-
-With other webpack-based bundlers, you can use the `addreth/no-wagmi` import path:
+Yes, wagmi is only used for ENS related features if present, but the component can work without by importing `"addreth/no-wagmi"`:
 
 ```tsx
 import { Addreth } from "addreth/no-wagmi";
+```
+
+You can also use the mechanism of your choice to resolve the ENS name and avatar, and set these as `icon` and `label`:
+
+```tsx
+import { Addreth } from "addreth/no-wagmi";
+import { useENS } from "my-ens-library";
+
+function App() {
+  const { name, avatar } = useENS("0x…");
+  return <Addreth address="0x…" icon={avatar} label={name} />;
+}
 ```
 
 ## License

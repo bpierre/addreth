@@ -19,9 +19,8 @@
   "bugs": "https://github.com/bpierre/addreth/issues",
   "repository": "github:bpierre/addreth",
   "scripts": {
-    "demo": "cd demo && pnpm dev",
     "build": "pnpm tsc && node ./build.js",
-    "lint": "eslint ./src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "pnpm oxlint ./src --import-plugin --react-perf-plugin --jsx-a11y-plugin --allow pedantic"
   },
   "type": "module",
   "sideEffects": false,
@@ -45,30 +44,25 @@
     "/dist"
   ],
   "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0",
-    "wagmi": ">=2.0.0"
+    "react": "18",
+    "react-dom": "18",
+    "wagmi": "2"
   },
   "devDependencies": {
-    "@compiled/babel-plugin": "^0.28.2",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "@typescript-eslint/eslint-plugin": "^7.0.1",
-    "@typescript-eslint/parser": "^7.0.1",
-    "@vanilla-extract/css": "^1.14.1",
-    "@vanilla-extract/esbuild-plugin": "^2.3.5",
-    "@vanilla-extract/vite-plugin": "^4.0.4",
-    "@vitejs/plugin-react-swc": "^3.6.0",
-    "blo": "^1.1.1",
-    "esbuild": "^0.20.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "lightningcss": "^1.23.0",
+    "@compiled/babel-plugin": "^0.29.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vanilla-extract/css": "^1.15.3",
+    "@vanilla-extract/esbuild-plugin": "^2.3.8",
+    "@vanilla-extract/vite-plugin": "^4.0.13",
+    "@vitejs/plugin-react-swc": "^3.7.0",
+    "blo": "^1.2.0",
+    "esbuild": "^0.23.0",
+    "lightningcss": "^1.25.1",
+    "oxlint": "^0.6.1",
     "rollup-plugin-preserve-directives": "^0.4.0",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.2",
-    "vite-plugin-dts": "^3.7.2"
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4",
+    "vite-plugin-dts": "^3.9.1"
   }
 }
