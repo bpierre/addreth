@@ -1,10 +1,10 @@
 import type { ForwardedRef } from "react";
 import type { AddrethProps } from "./Addreth";
 
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
+import { useEnsAvatar, useEnsName } from "wagmi";
 import { Addreth as AddrethWrapped } from "./Addreth";
 import { useExtendConfig } from "./AddrethConfig";
-import { useEnsResolved } from "./ens";
 
 export { AddrethConfig } from "./AddrethConfig";
 export { THEMES } from "./theme";
@@ -15,19 +15,32 @@ export const Addreth = forwardRef(function Addreth(
   ref: ForwardedRef<HTMLButtonElement>,
 ) {
   const config = useExtendConfig(props);
-  const ensResolved = useEnsResolved({
+
+  const { data: name } = useEnsName({
     address: props.address,
-    fetchSettings: {
-      avatar: config.icon === "ens",
-      name: config.label === "ens",
+    query: {
+      enabled: config.label === "ens",
     },
   });
+
+  const { data: avatar } = useEnsAvatar({
+    name: name || "",
+    query: {
+      enabled: Boolean(name && config.icon === "ens"),
+    },
+  });
+
+  const ens = useMemo(() => ({
+    avatar: avatar ?? null,
+    name: name ?? null,
+  }), [avatar, name]);
+
   return (
     <AddrethWrapped
       ref={ref}
       address={props.address}
       config={config}
-      ensResolved={ensResolved}
+      ens={ens}
     />
   );
 });

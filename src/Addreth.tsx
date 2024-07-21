@@ -75,11 +75,11 @@ export type AddrethProps = {
 export const Addreth = forwardRef(function Addreth({
   address,
   config,
-  ensResolved,
+  ens,
 }: {
   address: AddrethProps["address"];
   config: Config;
-  ensResolved?: {
+  ens?: {
     avatar: string | null;
     name: string | null;
   };
@@ -92,19 +92,19 @@ export const Addreth = forwardRef(function Addreth({
 
   const iconSrc = useMemo(() => {
     if (typeof customBadgeIcon === "string") return customBadgeIcon;
-    if (icon === "ens") return ensResolved?.avatar ?? blo(address);
+    if (icon === "ens") return ens?.avatar ?? blo(address);
     if (icon === "identicon") return blo(address);
     if (typeof icon === "string") return icon;
     return null;
-  }, [address, ensResolved, icon, customBadgeIcon]);
+  }, [address, ens, icon, customBadgeIcon]);
 
   const iconLoaded = useImageLoaded(iconSrc);
 
   const labelNode = useMemo(() => {
-    if (label === "ens" && ensResolved?.name) return ensResolved.name;
+    if (label === "ens" && ens?.name) return ens.name;
     if (typeof label === "function") return label(address);
     return shortenAddress(address, shortenAddress_ || 40);
-  }, [address, ensResolved, label, shortenAddress_]);
+  }, [address, ens, label, shortenAddress_]);
 
   const explorer = config.explorer(address);
 
@@ -200,8 +200,8 @@ export const Addreth = forwardRef(function Addreth({
         </button>
         {["all", "copy"].includes(config.actions) && (
           <CopyButton
-            content={label === "ens" && ensResolved?.name || address}
-            label={label === "ens" && ensResolved?.name || "address"}
+            content={label === "ens" && ens?.name || address}
+            label={label === "ens" && ens?.name || "address"}
             theme={th}
             style={{
               width: buttonHeight,
