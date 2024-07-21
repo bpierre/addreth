@@ -73,7 +73,7 @@ importers:
         specifier: workspace:*
         version: link:../..
       next:
-        specifier: '14'
+        specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.24.8)(react-dom@18.3.1)(react@18.3.1)
       prism-react-renderer:
         specifier: ^2.3.1
@@ -92,13 +92,13 @@ importers:
         version: 2.11.3(@tanstack/react-query@5.51.11)(@types/react@18.3.3)(react-dom@18.3.1)(react-native@0.74.3)(react@18.3.1)(rollup@4.19.0)(typescript@5.5.3)(viem@2.17.8)
     devDependencies:
       '@types/node':
-        specifier: ^20.14.11
+        specifier: '20'
         version: 20.14.11
       '@types/react':
-        specifier: ^18.3.3
+        specifier: '18'
         version: 18.3.3
       '@types/react-dom':
-        specifier: ^18.3.0
+        specifier: '18'
         version: 18.3.0
       oxlint:
         specifier: ^0.6.1
@@ -116,7 +116,7 @@ importers:
         specifier: workspace:*
         version: link:../..
       next:
-        specifier: '14'
+        specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.24.8)(react-dom@18.3.1)(react@18.3.1)
       rand-seed:
         specifier: ^1.0.2
@@ -7510,6 +7510,7 @@ packages:
     resolution: {integrity: sha512-6FsRAQsxQ61mw+qP1ZzbL9Bc78x2p5OqNgNpnoAFLTrX8n5Kxph0CsnhmKKNXTWjXqU5L0pGPR7hYk+XWZr60Q==}
     dependencies:
       brace-expansion: 1.1.11
+    dev: true
 
   /minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -7681,7 +7682,7 @@ packages:
     resolution: {integrity: sha512-tmPX422rYgofd4epzrNoOXiE8XFZYOcCq1vD7MAXCDO+O+zndlA2ztdKKMa+EeuBG5tHETpr4ml4RGgpqDCCAg==}
     engines: {node: '>= 0.10.5'}
     dependencies:
-      minimatch: 3.0.8
+      minimatch: 3.1.2
     dev: false
 
   /node-fetch-native@1.6.4:
