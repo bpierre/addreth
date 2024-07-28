@@ -148,6 +148,7 @@ export const Addreth = forwardRef(function Addreth({
             setOpened(true);
           }}
           title={address}
+          type="button"
           style={{
             gap: th.badgeGap,
             ...config.fontMono,

@@ -47,6 +47,7 @@ export function CopyButton({
         void navigator.clipboard.writeText(content);
         startCopyAnim();
       }}
+      type="button"
       style={{
         overflow: "hidden",
         color: th.secondaryColor,
